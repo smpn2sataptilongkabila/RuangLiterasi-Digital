@@ -2190,16 +2190,39 @@ function logout() {
 
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
     sidebar.classList.toggle('active');
+    
+    // Toggle overlay
+    if (sidebar.classList.contains('active')) {
+        overlay.classList.add('active');
+    } else {
+        overlay.classList.remove('active');
+    }
 }
 
 // Close sidebar when clicking outside on mobile
 window.addEventListener('click', function(e) {
     const sidebar = document.getElementById('sidebar');
     const hamburgerMenu = document.getElementById('hamburgerMenu');
+    const overlay = document.getElementById('sidebarOverlay');
     
     if (window.innerWidth <= 768 && sidebar && hamburgerMenu && !sidebar.contains(e.target) && !hamburgerMenu.contains(e.target)) {
         sidebar.classList.remove('active');
+        if (overlay) {
+            overlay.classList.remove('active');
+        }
+    }
+});
+
+// Close sidebar when window is resized to desktop size
+window.addEventListener('resize', function() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    
+    if (window.innerWidth > 768 && sidebar && overlay) {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
     }
 });
 
