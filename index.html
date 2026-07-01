@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMPN2SATAPTkbl-RuangLiterasi </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Home Screen -->
+    <div id="homeScreen" class="screen active">
+        <div class="home-container">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">📚 Ruang Literasi
+                    </h1>
+                    <p class="hero-subtitle">Perpustakaan Digital untuk Meningkatkan Literasi Anda</p>
+                    <p class="hero-description">Temukan ilmu melalui buku-buku pilihan tentang korespondensi, kearsipan, dan banyak lagi</p>
+                    <button class="btn-primary btn-large" onclick="showDashboard()">
+                        🚀 Masuk ke Dashboard
+                    </button>
+                    <button class="btn-secondary btn-large" onclick="showHomeInfo()" style="margin-left: 10px;">
+                        ℹ️ Tentang Website
+                    </button>
+                </div>
+                <div class="hero-decoration">
+                    <div class="floating-book book-1">📧</div>
+                    <div class="floating-book book-2">📁</div>
+                    <div class="floating-book book-3">📝</div>
+                    <div class="floating-book book-4">✍️</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Information Section -->
+    <div id="homeInfo" class="screen">
+        <div class="home-info-container">
+            <div class="home-info-header">
+                <h1>📚 Tentang Ruang Literasi</h1>
+                <p class="home-info-subtitle">Website Perpustakaan Digital SMPN 2 Satap Tkbl</p>
+            </div>
+
+            <div class="home-info-content">
+                <div class="info-section">
+                    <h2>🎯 Tujuan Website</h2>
+                    <p>Ruang Literasi adalah platform perpustakaan digital yang dikembangkan untuk meningkatkan literasi siswa dan masyarakat. Website ini menyediakan akses ke berbagai buku elektronik tentang korespondensi, kearsipan, dan cerita inspiratif.</p>
+                </div>
+
+                <div class="info-section">
+                    <h2>📖 Fitur Utama</h2>
+                    <ul class="features-list">
+                        <li><strong>📚 Koleksi Buku Digital:</strong> Akses berbagai buku pilihan dalam format digital</li>
+                        <li><strong>📂 Kategori Terorganisir:</strong> Buku dikategorikan untuk memudahkan pencarian</li>
+                        <li><strong>🔖 Bookmark:</strong> Simpan buku favorit untuk dibaca nanti</li>
+                        <li><strong>📱 Responsive Design:</strong> Akses dari perangkat apapun (HP, tablet, laptop)</li>
+                        <li><strong>🎨 Interface Modern:</strong> Tampilan yang menarik dan mudah digunakan</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h2>📚 Kategori Buku</h2>
+                    <div class="category-grid">
+                        <div class="category-card">
+                            <div class="category-icon">📧</div>
+                            <h3>Korespondensi</h3>
+                            <p>Buku tentang sejarah dan panduan surat-menyurat bisnis modern</p>
+                        </div>
+                        <div class="category-card">
+                            <div class="category-icon">📁</div>
+                            <h3>Kearsipan</h3>
+                            <p>Mengelola dan menyimpan dokumen dengan sistem yang teratur</p>
+                        </div>
+                        <div class="category-card">
+                            <div class="category-icon">📖</div>
+                            <h3>Cerita</h3>
+                            <p>Kumpulan cerita inspiratif dan edukatif</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h2>📋 Petunjuk Penggunaan</h2>
+                    <div class="instructions-container">
+                        <div class="instruction-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Pilih Kategori</h4>
+                                <p>Gunakan navigasi kategori di atas untuk memfilter buku sesuai minat Anda</p>
+                            </div>
+                        </div>
+                        <div class="instruction-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Jelajahi Buku</h4>
+                                <p>Klik pada cover buku untuk melihat detail lengkap atau langsung membaca</p>
+                            </div>
+                        </div>
+                        <div class="instruction-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Baca Buku</h4>
+                                <p>Pilih bab yang ingin dibaca dari daftar isi di sidebar. Gunakan tombol navigasi untuk pindah bab</p>
+                            </div>
+                        </div>
+                        <div class="instruction-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Simpan Favorit</h4>
+                                <p>Gunakan fitur bookmark untuk menyimpan buku yang ingin dibaca kembali</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h2>💡 Tips Menggunakan Website</h2>
+                    <div class="tips-container">
+                        <div class="tip-card">
+                            <span class="tip-icon">🔍</span>
+                            <p>Gunakan filter kategori untuk menemukan buku yang sesuai dengan minat Anda</p>
+                        </div>
+                        <div class="tip-card">
+                            <span class="tip-icon">📑</span>
+                            <p>Baca daftar isi terlebih dahulu untuk memahami struktur buku</p>
+                        </div>
+                        <div class="tip-card">
+                            <span class="tip-icon">⭐</span>
+                            <p>Berikan rating dan simpan buku favorit untuk referensi masa depan</p>
+                        </div>
+                        <div class="tip-card">
+                            <span class="tip-icon">📱</span>
+                            <p>Untuk pengalaman membaca terbaik, gunakan perangkat dengan layar yang nyaman</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section contact-section">
+                    <h2>📞 Kontak & Informasi</h2>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span class="contact-icon">🏫</span>
+                            <div>
+                                <strong>SMP Negeri 2 Satap Tkbl</strong>
+                                <p>Jl. Pendidikan No. 123, Tkbl</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📧</span>
+                            <div>
+                                <strong>Email</strong>
+                                <p>info@smpn2satap-tkbl.sch.id</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">🌐</span>
+                            <div>
+                                <strong>Website</strong>
+                                <p>www.smpn2satap-tkbl.sch.id</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home-info-footer">
+                <button class="btn-primary btn-large" onclick="showDashboard()">
+                    🚀 Masuk ke Perpustakaan
+                </button>
+                <button class="btn-secondary btn-large" onclick="showHomeScreen()">
+                    🏠 Kembali ke Beranda
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="screen">
+        <div class="dashboard-layout">
+            <aside class="dashboard-sidebar" id="sidebar">
+                <div class="sidebar-header">
+                    <div class="logo">
+                        <span class="logo-icon">📚</span>
+                        <h1>Web Literasi</h1>
+                    </div>
+                    <button class="hamburger-menu" id="hamburgerMenu" onclick="toggleSidebar()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+
+                <nav class="dashboard-nav">
+                    <button class="nav-btn active" data-category="home">🏠 Home</button>
+                    <button class="nav-btn" data-category="korespondensi">📧 Korespondensi</button>
+                    <button class="nav-btn" data-category="kearsipan">📁 Kearsipan</button>
+                    <button class="nav-btn" data-category="cerita">📖 Cerita</button>
+                </nav>
+
+                <div class="sidebar-footer">
+                    <button class="btn-logout" onclick="logout()">
+                        <span>🚪</span>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </aside>
+
+            <main class="dashboard-content">
+                <div class="container">
+                    <div class="welcome-section">
+                        <h2>Selamat Datang di Perpustakaan Digital</h2>
+                        <p>Pilih buku yang ingin Anda baca dari kategori di bawah ini</p>
+                    </div>
+
+                    <div class="books-grid" id="booksGrid" style="display: none;"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Book Reader Modal -->
+    <div id="bookReaderModal" class="modal">
+        <div class="modal-content modal-full">
+            <div class="modal-header">
+                <h3 id="readerTitle">📖 Membaca Buku</h3>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span id="readingTime" style="color: var(--gray-600); font-size: 14px; font-weight: 600;">⏱️ 0:00</span>
+                    <button class="close-btn" onclick="closeBookReader()">&times;</button>
+                </div>
+            </div>
+            <div class="reading-progress-container">
+                <div class="reading-progress-bar" id="readingProgress"></div>
+            </div>
+            <div class="book-reader">
+                <div class="reader-sidebar">
+                    <h4>Daftar Isi</h4>
+                    <ul class="chapters-list" id="chaptersList"></ul>
+                </div>
+                <div class="reader-content" id="readerContent">
+                    <div class="chapter-content" id="chapterContent"></div>
+                    <div class="reader-navigation">
+                        <button class="nav-btn" id="prevChapter" onclick="previousChapter()">← Sebelumnya</button>
+                        <button class="nav-btn" id="nextChapter" onclick="nextChapter()">Selanjutnya →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Book Detail Modal -->
+    <div id="bookDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="bookDetailTitle">Detail Buku</h3>
+                <button class="close-btn" onclick="closeBookDetail()">&times;</button>
+            </div>
+            <div class="book-detail-content" id="bookDetailContent"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
