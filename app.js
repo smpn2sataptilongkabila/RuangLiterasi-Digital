@@ -1042,6 +1042,64 @@ OP.02/008/2024 - Surat pemesanan barang
                         <li>Disaster recovery plan</li>
                     </ul>
                 `
+            },
+            {
+                title: "Studi Kasus dan Praktik Terbaik",
+                content: `
+                    <h2>Studi Kasus dan Praktik Terbaik</h2>
+                    <h3>Studi Kasus 1: Kantor kecil yang sukses</h3>
+                    <p>PT. Maju Bersama adalah perusahaan kecil dengan 20 karyawan. Mereka berhasil mengimplementasikan sistem arsip yang efisien:</p>
+                    <ul>
+                        <li>Menggunakan sistem hybrid (fisik + digital)</li>
+                        <li>Klasifikasi sederhana berdasarkan departemen</li>
+                        <li>Retention schedule yang jelas</li>
+                        <li>Training bulanan untuk staf</li>
+                    </ul>
+                    <p><strong>Hasil:</strong> Efisiensi pencarian arsip meningkat 70%, space terhemat 40%.</p>
+
+                    <h3>Studi Kasus 2: Transformasi Digital</h3>
+                    <p>Yayasan Pendidikan Nusantara memiliki ribuan dokumen fisik. Mereka melakukan digitalisasi bertahap:</p>
+                    <ol>
+                        <li>Tahun 1: Digitalisasi dokumen vital (10% dari total)</li>
+                        <li>Tahun 2: Digitalisasi dokumen aktif (30%)</li>
+                        <li>Tahun 3: Digitalisasi dokumen inaktif (60%)</li>
+                    </ol>
+                    <p><strong>Hasil:</strong> Akses dokumen menjadi 10x lebih cepat, cost saving Rp 50 juta/tahun.</p>
+
+                    <h3>Praktik Terbaik dari Berbagai Organisasi</h3>
+                    <h3>1. Kementerian Pendidikan</h3>
+                    <ul>
+                        <li>Sistem klasifikasi nasional</li>
+                        <li>Digitalisasi seluruh arsip penting</li>
+                        <li>Training rutin untuk seluruh staf</li>
+                    </ul>
+
+                    <h3>2. Perusahaan Multinasional</h3>
+                    <ul>
+                        <li>Cloud-based document management</li>
+                        <li>Automated retention schedules</li>
+                        <li>AI-powered search dan classification</li>
+                    </ul>
+
+                    <h3>3. Lembaga Arsip Nasional</h3>
+                    <ul>
+                        <li>Standar ISO 15489 compliance</li>
+                        <li>Preservation program untuk dokumen historis</li>
+                        <li>Public access system</li>
+                    </ul>
+
+                    <h3>Tips dari Praktisi</h3>
+                    <ol>
+                        <li>Mulai dari yang kecil, konsisten, dan berkembang</li>
+                        <li>Jangan terburu-buru dalam digitalisasi</li>
+                        <li>Investasi di training lebih penting dari software</li>
+                        <li>Review dan audit secara berkala</li>
+                        <li>Dokumentasikan everything untuk continuity</li>
+                    </ol>
+
+                    <h3>Kesimpulan</h3>
+                    <p>Kearsipan yang baik membutuhkan perencanaan, konsistensi, dan komitmen. Dengan menerapkan prinsip dan praktik terbaik, organisasi dapat mencapai efisiensi tinggi dan compliance yang baik.</p>
+                `
             }
         ]
     },
@@ -1352,64 +1410,6 @@ Kontrak                  | 7 tahun setelah berakhir
                         <li>Training untuk semua users</li>
                         <li>Disaster recovery plan</li>
                     </ol>
-                `
-            },
-            {
-                title: "Studi Kasus dan Praktik Terbaik",
-                content: `
-                    <h2>Studi Kasus dan Praktik Terbaik</h2>
-                    <h3>Studi Kasus 1: Kantor kecil yang sukses</h3>
-                    <p>PT. Maju Bersama adalah perusahaan kecil dengan 20 karyawan. Mereka berhasil mengimplementasikan sistem arsip yang efisien:</p>
-                    <ul>
-                        <li>Menggunakan sistem hybrid (fisik + digital)</li>
-                        <li>Klasifikasi sederhana berdasarkan departemen</li>
-                        <li>Retention schedule yang jelas</li>
-                        <li>Training bulanan untuk staf</li>
-                    </ul>
-                    <p><strong>Hasil:</strong> Efisiensi pencarian arsip meningkat 70%, space terhemat 40%.</p>
-
-                    <h3>Studi Kasus 2: Transformasi Digital</h3>
-                    <p>Yayasan Pendidikan Nusantara memiliki ribuan dokumen fisik. Mereka melakukan digitalisasi bertahap:</p>
-                    <ol>
-                        <li>Tahun 1: Digitalisasi dokumen vital (10% dari total)</li>
-                        <li>Tahun 2: Digitalisasi dokumen aktif (30%)</li>
-                        <li>Tahun 3: Digitalisasi dokumen inaktif (60%)</li>
-                    </ol>
-                    <p><strong>Hasil:</strong> Akses dokumen menjadi 10x lebih cepat, cost saving Rp 50 juta/tahun.</p>
-
-                    <h3>Praktik Terbaik dari Berbagai Organisasi</h3>
-                    <h3>1. Kementerian Pendidikan</h3>
-                    <ul>
-                        <li>Sistem klasifikasi nasional</li>
-                        <li>Digitalisasi seluruh arsip penting</li>
-                        <li>Training rutin untuk seluruh staf</li>
-                    </ul>
-
-                    <h3>2. Perusahaan Multinasional</h3>
-                    <ul>
-                        <li>Cloud-based document management</li>
-                        <li>Automated retention schedules</li>
-                        <li>AI-powered search dan classification</li>
-                    </ul>
-
-                    <h3>3. Lembaga Arsip Nasional</h3>
-                    <ul>
-                        <li>Standar ISO 15489 compliance</li>
-                        <li>Preservation program untuk dokumen historis</li>
-                        <li>Public access system</li>
-                    </ul>
-
-                    <h3>Tips dari Praktisi</h3>
-                    <ol>
-                        <li>Mulai dari yang kecil, konsisten, dan berkembang</li>
-                        <li>Jangan terburu-buru dalam digitalisasi</li>
-                        <li>Investasi di training lebih penting dari software</li>
-                        <li>Review dan audit secara berkala</li>
-                        <li>Dokumentasikan everything untuk continuity</li>
-                    </ol>
-
-                    <h3>Kesimpulan</h3>
-                    <p>Kearsipan yang baik membutuhkan perencanaan, konsistensi, dan komitmen. Dengan menerapkan prinsip dan praktik terbaik, organisasi dapat mencapai efisiensi tinggi dan compliance yang baik.</p>
                 `
             }
         ]
@@ -1821,7 +1821,15 @@ Best regards,
                     </ol>
 
                     <h3>Hari yang Ditunggu</h3>
-                    <p>Sa</p>
+                    <p>Setelah bertahun-tahun perjuangan, akhirnya hari itu tiba. Ketiga anaknya yang sudah sukses membesarkan ibu mereka dengan sangat baik. Ibu Siti menangis dengan air mata kebahagiaan. Semua pengorbanannya terbayar.</p>
+
+                    <h3>Pelajaran dari Ibu Siti</h3>
+                    <p>Kisah ini mengajarkan kita tentang:</p>
+                    <ul>
+                        <li><strong>Pengorbanan:</strong> Cinta sejati adalah pengorbanan tanpa pamrih</li>
+                        <li><strong>Ketekunan:</strong> Terus berjuang meskipun sulit</li>
+                        <li><strong>Keajaiban:</strong> Tuhan selalu membalas kebaikan</li>
+                    </ul>
                 `
             },
             {
@@ -2185,14 +2193,36 @@ function showDashboard() {
     const container = document.getElementById('booksGrid');
     container.style.display = 'grid';
     
-    // Show bookmarked books by default
-    renderBookmarkedBooks();
+    // Show home info by default
+    renderHomeInfo();
     
     // Set home button as active
     document.querySelectorAll('.nav-btn[data-category]').forEach(btn => {
         btn.classList.remove('active');
     });
     document.querySelector('.nav-btn[data-category="home"]').classList.add('active');
+    
+    // Save state
+    saveState();
+}
+
+function showBookmarkedBooks() {
+    document.getElementById('homeScreen').classList.remove('active');
+    document.getElementById('dashboard').classList.add('active');
+    currentScreen = 'dashboard';
+    
+    // Show books grid
+    const container = document.getElementById('booksGrid');
+    container.style.display = 'grid';
+    
+    // Render bookmarked books
+    renderBookmarkedBooks();
+    
+    // Set bookmarked button as active
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.getElementById('bookmarkedNavBtn').classList.add('active');
     
     // Save state
     saveState();
@@ -2209,7 +2239,7 @@ function toggleBooks() {
         toggleBtn.innerHTML = '🙈 Sembunyikan Buku';
         // Render books based on current category
         if (currentCategory === 'home') {
-            renderBookmarkedBooks();
+            renderHomeInfo();
         } else {
             renderBooks(currentCategory === 'all' ? 'all' : currentCategory);
         }
@@ -2278,6 +2308,45 @@ window.addEventListener('click', function(e) {
     }
 });
 
+// Add touch swipe support for sidebar
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+document.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const swipeThreshold = 50;
+    
+    // Only handle swipe on mobile/tablet
+    if (window.innerWidth > 768) return;
+    
+    const diff = touchStartX - touchEndX;
+    
+    // Swipe right to open sidebar (from left edge)
+    if (diff > swipeThreshold && touchStartX < 50 && !sidebar.classList.contains('active')) {
+        sidebar.classList.add('active');
+        if (overlay) {
+            overlay.classList.add('active');
+        }
+    }
+    // Swipe left to close sidebar
+    else if (diff < -swipeThreshold && sidebar.classList.contains('active')) {
+        sidebar.classList.remove('active');
+        if (overlay) {
+            overlay.classList.remove('active');
+        }
+    }
+}
+
 // Close sidebar when window is resized to desktop size
 window.addEventListener('resize', function() {
     const sidebar = document.getElementById('sidebar');
@@ -2302,7 +2371,7 @@ document.querySelectorAll('.nav-btn[data-category]').forEach(btn => {
         container.style.display = 'grid';
         
         if (category === 'home') {
-            renderBookmarkedBooks();
+            renderHomeInfo();
         } else {
             renderBooks(category);
         }
@@ -2322,6 +2391,125 @@ function renderBooks(category) {
     }
     
     container.innerHTML = filteredBooks.map(book => createBookCard(book)).join('');
+}
+
+function renderHomeInfo() {
+    const container = document.getElementById('booksGrid');
+    const welcomeSection = document.querySelector('.welcome-section');
+    
+    // Update welcome message
+    welcomeSection.innerHTML = `
+        <h2>📖 Pentingnya Ilmu dalam Kehidupan</h2>
+        <p>Mengapa membaca dan belajar adalah kunci sukses?</p>
+    `;
+    
+    // Render informational content
+    container.innerHTML = `
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; animation: fadeInUp 0.8s ease-out;">
+            
+            <!-- Card 1: Pentingnya Ilmu -->
+            <div style="background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%); border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);">
+                <div style="font-size: 56px; margin-bottom: 20px; text-align: center;">🎓</div>
+                <h3 style="font-size: 22px; font-weight: 700; color: #1e3a8a; margin-bottom: 15px; text-align: center;">Mengapa Ilmu Penting?</h3>
+                <div style="color: #374151; line-height: 1.8; font-size: 14px;">
+                    <p style="margin-bottom: 12px;"><strong>📚 Ilmu adalah cahaya:</strong> Menghilangkan kegelapan ketidakpastian dan membuka pintu kesuksesan.</p>
+                    <p style="margin-bottom: 12px;"><strong>💡 Ilmu adalah kekuatan:</strong> Memberdayakan kita untuk membuat perubahan positif dalam hidup dan masyarakat.</p>
+                    <p style="margin-bottom: 12px;"><strong>🌟 Ilmu adalah investasi:</strong> Tidak ada yang bisa merampas pengetahuan yang telah kita peroleh.</p>
+                    <p><strong>🚀 Ilmu adalah kunci:</strong> Membuka peluang tak terbatas untuk masa depan yang lebih baik.</p>
+                </div>
+            </div>
+
+            <!-- Card 2: Manfaat Membaca -->
+            <div style="background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%); border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);">
+                <div style="font-size: 56px; margin-bottom: 20px; text-align: center;">📖</div>
+                <h3 style="font-size: 22px; font-weight: 700; color: #1e3a8a; margin-bottom: 15px; text-align: center;">Manfaat Membaca Buku</h3>
+                <div style="color: #374151; line-height: 1.8; font-size: 14px;">
+                    <p style="margin-bottom: 12px;"><strong>🧠 Meningkatkan kecerdasan:</strong> Melatih otak dan meningkatkan kemampuan berpikir kritis.</p>
+                    <p style="margin-bottom: 12px;"><strong>💪 Mengurangi stres:</strong> Membaca adalah cara efektif untuk relaksasi dan menenangkan pikiran.</p>
+                    <p style="margin-bottom: 12px;"><strong>🎯 Fokus dan konsentrasi:</strong> Melatih kemampuan berkonsentrasi dalam dunia yang penuh distraksi.</p>
+                    <p><strong>✍️ Meningkatkan bahasa:</strong> Memperkaya kosakata dan kemampuan komunikasi.</p>
+                </div>
+            </div>
+
+            <!-- Card 3: Tips Belajar Efektif -->
+            <div style="background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%); border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);">
+                <div style="font-size: 56px; margin-bottom: 20px; text-align: center;">💡</div>
+                <h3 style="font-size: 22px; font-weight: 700; color: #1e3a8a; margin-bottom: 15px; text-align: center;">Tips Belajar Efektif</h3>
+                <div style="color: #374151; line-height: 1.8; font-size: 14px;">
+                    <p style="margin-bottom: 12px;"><strong>📅 Buat jadwal:</strong> Tetapkan waktu khusus untuk belajar setiap hari secara konsisten.</p>
+                    <p style="margin-bottom: 12px;"><strong>📝 Catat penting:</strong> Buat ringkasan dan catatan dari yang Anda pelajari.</p>
+                    <p style="margin-bottom: 12px;"><strong>🔄 Review berkala:</strong> Ulangi materi yang sudah dipelajari untuk mengingatnya.</p>
+                    <p><strong>🎓 Praktik langsung:</strong> Terapkan ilmu yang dipelajari dalam kehidupan nyata.</p>
+                </div>
+            </div>
+
+            <!-- Card 4: Nilai-nilai Pendidikan -->
+            <div style="background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%); border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);">
+                <div style="font-size: 56px; margin-bottom: 20px; text-align: center;">⭐</div>
+                <h3 style="font-size: 22px; font-weight: 700; color: #1e3a8a; margin-bottom: 15px; text-align: center;">Nilai-nilai Pendidikan</h3>
+                <div style="color: #374151; line-height: 1.8; font-size: 14px;">
+                    <p style="margin-bottom: 12px;"><strong>🎯 Integritas:</strong> Belajar dengan jujur dan bertanggung jawab.</p>
+                    <p style="margin-bottom: 12px;"><strong>🤝 Kolaborasi:</strong> Belajar bersama dan membantu sesama.</p>
+                    <p style="margin-bottom: 12px;"><strong>💪 Ketekunan:</strong> Terus berusaha meskipun menghadapi tantangan.</p>
+                    <p><strong>🌟 Inovasi:</strong> Berani berpikir kreatif dan mencari solusi baru.</p>
+                </div>
+            </div>
+
+            <!-- Card 5: Literasi Digital -->
+            <div style="background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%); border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);">
+                <div style="font-size: 56px; margin-bottom: 20px; text-align: center;">💻</div>
+                <h3 style="font-size: 22px; font-weight: 700; color: #1e3a8a; margin-bottom: 15px; text-align: center;">Literasi Digital</h3>
+                <div style="color: #374151; line-height: 1.8; font-size: 14px;">
+                    <p style="margin-bottom: 12px;"><strong>🌐 Akses informasi:</strong> Dunia pengetahuan di ujung jari Anda.</p>
+                    <p style="margin-bottom: 12px;"><strong>🔍 Evaluasi sumber:</strong> Kemampuan membedakan informasi valid dan hoaks.</p>
+                    <p style="margin-bottom: 12px;"><strong>🛡️ Keamanan digital:</strong> Melindungi diri di dunia maya.</p>
+                    <p><strong>🤝 Etika digital:</strong> Berkomunikasi dengan sopan dan bertanggung jawab.</p>
+                </div>
+            </div>
+
+            <!-- Card 6: Membangun Karakter -->
+            <div style="background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%); border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);">
+                <div style="font-size: 56px; margin-bottom: 20px; text-align: center;">🌱</div>
+                <h3 style="font-size: 22px; font-weight: 700; color: #1e3a8a; margin-bottom: 15px; text-align: center;">Membangun Karakter</h3>
+                <div style="color: #374151; line-height: 1.8; font-size: 14px;">
+                    <p style="margin-bottom: 12px;"><strong>💭 Berpikir kritis:</strong> Menganalisis sebelum bertindak.</p>
+                    <p style="margin-bottom: 12px;"><strong>❤️ Empati:</strong> Memahami perasaan orang lain.</p>
+                    <p style="margin-bottom: 12px;"><strong>🎯 Tujuan hidup:</strong> Memiliki visi dan misi yang jelas.</p>
+                    <p><strong>🌈 Multitasking:</strong> Mampu menyeimbangkan berbagai aspek kehidupan.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Quote Section -->
+        <div style="margin-top: 40px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(245, 158, 11, 0.1) 100%); border-left: 5px solid #f59e0b; padding: 25px 30px; border-radius: 12px; backdrop-filter: blur(10px); box-shadow: 0 8px 20px rgba(0,0,0,0.15);">
+            <div style="font-size: 48px; margin-bottom: 15px; text-align: center;">💬</div>
+            <h3 style="font-size: 20px; font-weight: 700; color: #fbbf24; margin-bottom: 15px; text-align: center; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
+                "Ilmu adalah satu-satunya harta yang tidak akan pernah habis jika dibagikan"
+            </h3>
+            <p style="color: white; text-align: center; font-size: 15px; opacity: 0.95; font-style: italic; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">
+                - Marcus Tullius Cicero -
+            </p>
+        </div>
+
+        <!-- Call to Action -->
+        <div style="margin-top: 30px; text-align: center; padding: 20px;">
+            <p style="color: white; font-size: 16px; margin-bottom: 20px; opacity: 0.95; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
+                🚀 Mulai perjalanan literasi Anda sekarang! Pilih kategori buku di menu samping dan eksplorasi koleksi kami.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                <div style="background: rgba(255,255,255,0.2); padding: 12px 20px; border-radius: 50px; font-size: 14px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3); color: white;">
+                    📧 Korespondensi
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 12px 20px; border-radius: 50px; font-size: 14px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3); color: white;">
+                    📁 Kearsipan
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 12px 20px; border-radius: 50px; font-size: 14px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3); color: white;">
+                    📖 Cerita
+                </div>
+            </div>
+        </div>
+    `;
 }
 
 function renderBookmarkedBooks() {
@@ -2792,7 +2980,7 @@ window.addEventListener('load', function() {
             
             // Restore category
             if (savedState.currentCategory === 'home') {
-                renderBookmarkedBooks();
+                renderHomeInfo();
                 // Set home button as active
                 document.querySelectorAll('.nav-btn[data-category]').forEach(btn => {
                     btn.classList.remove('active');
