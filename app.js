@@ -5,6 +5,57 @@ let currentChapter = 0;
 let bookmarkedBooks = JSON.parse(localStorage.getItem('bookmarkedBooks')) || [];
 let currentCategory = 'all';
 
+// ==================== STATE PERSISTENCE ====================
+const STATE_KEY = 'webLiterasi_state';
+
+function saveState() {
+    const state = {
+        currentScreen: currentScreen,
+        currentCategory: currentCategory,
+        currentBookId: currentBook ? currentBook.id : null,
+        currentChapter: currentChapter,
+        sidebarOpen: false
+    };
+    localStorage.setItem(STATE_KEY, JSON.stringify(state));
+}
+
+function loadState() {
+    const savedState = localStorage.getItem(STATE_KEY);
+    if (savedState) {
+        try {
+            const state = JSON.parse(savedState);
+            
+            // Restore screen
+            if (state.currentScreen) {
+                currentScreen = state.currentScreen;
+            }
+            
+            // Restore category
+            if (state.currentCategory) {
+                currentCategory = state.currentCategory;
+            }
+            
+            // Restore book and chapter
+            if (state.currentBookId) {
+                const book = booksData.find(b => b.id === state.currentBookId);
+                if (book) {
+                    currentBook = book;
+                    currentChapter = state.currentChapter || 0;
+                }
+            }
+            
+            return state;
+        } catch (e) {
+            console.error('Error loading state:', e);
+        }
+    }
+    return null;
+}
+
+function clearState() {
+    localStorage.removeItem(STATE_KEY);
+}
+
 // ==================== BOOK DATA ====================
 const booksData = [
     // ==================== KORESPONDENSI ====================
@@ -2142,6 +2193,9 @@ function showDashboard() {
         btn.classList.remove('active');
     });
     document.querySelector('.nav-btn[data-category="home"]').classList.add('active');
+    
+    // Save state
+    saveState();
 }
 
 function toggleBooks() {
@@ -2171,6 +2225,9 @@ function showHomeInfo() {
     document.getElementById('dashboard').classList.remove('active');
     document.getElementById('homeInfo').classList.add('active');
     currentScreen = 'homeInfo';
+    
+    // Save state
+    saveState();
 }
 
 function showHomeScreen() {
@@ -2178,6 +2235,9 @@ function showHomeScreen() {
     document.getElementById('dashboard').classList.remove('active');
     document.getElementById('homeScreen').classList.add('active');
     currentScreen = 'homeScreen';
+    
+    // Save state
+    saveState();
 }
 
 function logout() {
@@ -2185,6 +2245,9 @@ function logout() {
         document.getElementById('dashboard').classList.remove('active');
         document.getElementById('homeScreen').classList.add('active');
         currentScreen = 'homeScreen';
+        
+        // Clear saved state on logout
+        clearState();
     }
 }
 
@@ -2243,6 +2306,9 @@ document.querySelectorAll('.nav-btn[data-category]').forEach(btn => {
         } else {
             renderBooks(category);
         }
+        
+        // Save state
+        saveState();
     });
 });
 
@@ -2481,6 +2547,9 @@ function openBookReader(bookId, chapterIndex = 0) {
     
     // Add touch swipe support
     addSwipeSupport();
+    
+    // Save state
+    saveState();
 }
 
 function startReadingTimer() {
@@ -2589,6 +2658,9 @@ function goToChapter(chapterIndex) {
     currentChapter = chapterIndex;
     renderChapter(chapterIndex);
     updateNavigationButtons();
+    
+    // Save state
+    saveState();
 }
 
 function previousChapter() {
@@ -2638,6 +2710,10 @@ function closeBookReader() {
     document.removeEventListener('keydown', handleKeyboardNavigation);
     
     document.getElementById('bookReaderModal').classList.remove('active');
+    
+    // Clear current book from state
+    currentBook = null;
+    saveState();
 }
 
 function updateReadingProgress() {
@@ -2689,11 +2765,70 @@ window.addEventListener('click', function(e) {
     }
 });
 
-// ==================== INITIALIZATION ====================
+// ==================== STATE RESTORATION ON LOAD ====================
 window.addEventListener('load', function() {
     console.log('📚 Web Literasi - Perpustakaan Digital');
     console.log('✨ Fitur: Baca buku, Detail buku, Bookmark, Navigasi chapter');
     console.log('📖 ' + booksData.length + ' buku tersedia dalam 6 kategori');
     console.log('📧 Korespondensi: Sejarah, contoh surat, cara penulisan');
     console.log('📁 Kearsipan: Sejarah, manajemen, sistem');
+    
+    // Load saved state
+    const savedState = loadState();
+    
+    if (savedState) {
+        // Hide all screens first
+        document.getElementById('homeScreen').classList.remove('active');
+        document.getElementById('dashboard').classList.remove('active');
+        document.getElementById('homeInfo').classList.remove('active');
+        
+        // Restore the correct screen
+        if (savedState.currentScreen === 'dashboard') {
+            document.getElementById('dashboard').classList.add('active');
+            
+            // Show books grid
+            const container = document.getElementById('booksGrid');
+            container.style.display = 'grid';
+            
+            // Restore category
+            if (savedState.currentCategory === 'home') {
+                renderBookmarkedBooks();
+                // Set home button as active
+                document.querySelectorAll('.nav-btn[data-category]').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                const homeBtn = document.querySelector('.nav-btn[data-category="home"]');
+                if (homeBtn) homeBtn.classList.add('active');
+            } else if (savedState.currentCategory) {
+                renderBooks(savedState.currentCategory);
+                // Set the correct category button as active
+                document.querySelectorAll('.nav-btn[data-category]').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                const categoryBtn = document.querySelector(`.nav-btn[data-category="${savedState.currentCategory}"]`);
+                if (categoryBtn) categoryBtn.classList.add('active');
+            }
+            
+            // Restore book reader if there was an open book
+            if (savedState.currentBookId && savedState.currentBookId !== null) {
+                const book = booksData.find(b => b.id === savedState.currentBookId);
+                if (book) {
+                    // Small delay to ensure modal is ready
+                    setTimeout(() => {
+                        openBookReader(savedState.currentBookId, savedState.currentChapter || 0);
+                    }, 100);
+                }
+            }
+        } else if (savedState.currentScreen === 'homeInfo') {
+            document.getElementById('homeInfo').classList.add('active');
+        } else {
+            // Default to home screen
+            document.getElementById('homeScreen').classList.add('active');
+        }
+    }
+});
+
+// ==================== SAVE STATE ON PAGE UNLOAD ====================
+window.addEventListener('beforeunload', function() {
+    saveState();
 });
