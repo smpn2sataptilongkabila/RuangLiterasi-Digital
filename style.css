@@ -2257,6 +2257,18 @@ body::after {
         gap: 10px;
     }
     
+    #bookmarkedNavBtn {
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        color: white;
+        border: none;
+        margin-top: 8px;
+    }
+    
+    #bookmarkedNavBtn:hover {
+        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        transform: translateX(3px);
+    }
+    
     .sidebar-footer {
         padding: 15px;
     }
