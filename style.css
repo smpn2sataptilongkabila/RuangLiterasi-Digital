@@ -1812,22 +1812,98 @@ body::after {
     display: block;
 }
 
-/* Tablet and Mobile Devices */
+/* Large Tablets and Small Desktops */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hero-section {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        min-height: calc(100vh - 150px);
+        padding: 30px 0;
+    }
+    
+    .hero-title {
+        font-size: 42px;
+    }
+    
+    .hero-subtitle {
+        font-size: 20px;
+    }
+    
+    .hero-description {
+        font-size: 15px;
+    }
+    
+    .hero-decoration {
+        height: 300px;
+    }
+    
+    .floating-book {
+        font-size: 90px;
+    }
+    
+    .dashboard-sidebar {
+        width: 250px;
+    }
+    
+    .dashboard-content {
+        margin-left: 250px;
+        padding: 30px 25px;
+    }
+    
+    .books-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 20px;
+    }
+    
+    .book-cover {
+        font-size: 70px;
+    }
+    
+    .book-reader {
+        grid-template-columns: 250px 1fr;
+    }
+    
+    .reader-sidebar {
+        padding: 20px;
+    }
+    
+    .reader-content {
+        padding: 40px 30px;
+    }
+    
+    .chapter-content {
+        font-size: 16px;
+    }
+    
+    .chapter-content h2 {
+        font-size: 26px;
+    }
+    
+    .chapter-content h3 {
+        font-size: 20px;
+    }
+    
+    .chapter-content p {
+        font-size: 16px;
+    }
+}
+
+/* Tablets and Mobile Devices */
 @media (max-width: 768px) {
     /* Home Screen */
     .hero-section {
         grid-template-columns: 1fr;
-        gap: 40px;
-        min-height: calc(100vh - 100px);
-        padding: 20px 0;
+        gap: 30px;
+        min-height: calc(100vh - 80px);
+        padding: 15px 0;
     }
     
     .hero-title {
-        font-size: 36px;
+        font-size: 32px;
     }
     
     .hero-subtitle {
-        font-size: 18px;
+        font-size: 17px;
     }
     
     .hero-description {
@@ -1835,11 +1911,11 @@ body::after {
     }
     
     .hero-decoration {
-        height: 250px;
+        height: 220px;
     }
     
     .floating-book {
-        font-size: 70px;
+        font-size: 65px;
     }
     
     .btn-primary, .btn-secondary {
@@ -1849,7 +1925,7 @@ body::after {
     
     .btn-large {
         padding: 14px 28px;
-        font-size: 16px;
+        font-size: 15px;
     }
     
     /* Features Grid */
@@ -1867,7 +1943,7 @@ body::after {
     }
     
     .section-title {
-        font-size: 28px;
+        font-size: 26px;
     }
     
     /* Stats Section */
@@ -1877,7 +1953,7 @@ body::after {
     }
     
     .stat-number {
-        font-size: 32px;
+        font-size: 30px;
     }
     
     .stat-label {
@@ -1913,7 +1989,7 @@ body::after {
     }
     
     .welcome-section h2 {
-        font-size: 24px;
+        font-size: 22px;
     }
     
     .welcome-section p {
@@ -1972,7 +2048,7 @@ body::after {
     }
     
     .book-detail-title {
-        font-size: 22px;
+        font-size: 20px;
     }
     
     .book-detail-author {
@@ -2041,11 +2117,11 @@ body::after {
     }
     
     .chapter-content h2 {
-        font-size: 22px;
+        font-size: 20px;
     }
     
     .chapter-content h3 {
-        font-size: 18px;
+        font-size: 17px;
     }
     
     .chapter-content p {
@@ -2069,11 +2145,11 @@ body::after {
     
     /* Home Info Section */
     .home-info-header h1 {
-        font-size: 28px;
+        font-size: 26px;
     }
     
     .home-info-subtitle {
-        font-size: 16px;
+        font-size: 15px;
     }
     
     .info-section {
@@ -2082,7 +2158,7 @@ body::after {
     }
     
     .info-section h2 {
-        font-size: 20px;
+        font-size: 19px;
     }
     
     .info-section p {
@@ -2215,11 +2291,11 @@ body::after {
 @media (max-width: 480px) {
     /* Home Screen */
     .hero-title {
-        font-size: 28px;
+        font-size: 26px;
     }
     
     .hero-subtitle {
-        font-size: 16px;
+        font-size: 15px;
     }
     
     .hero-description {
@@ -2227,35 +2303,35 @@ body::after {
     }
     
     .hero-decoration {
-        height: 200px;
+        height: 180px;
     }
     
     .floating-book {
-        font-size: 55px;
+        font-size: 50px;
     }
     
     .btn-primary, .btn-secondary {
-        padding: 10px 20px;
+        padding: 10px 18px;
         font-size: 13px;
     }
     
     .btn-large {
-        padding: 12px 24px;
+        padding: 12px 22px;
         font-size: 14px;
     }
     
     /* Section Titles */
     .section-title {
-        font-size: 24px;
+        font-size: 22px;
     }
     
     .stat-number {
-        font-size: 28px;
+        font-size: 26px;
     }
     
     /* Dashboard */
     .welcome-section h2 {
-        font-size: 20px;
+        font-size: 18px;
     }
     
     .welcome-section p {
@@ -2358,7 +2434,7 @@ body::after {
     
     /* Home Info */
     .home-info-header h1 {
-        font-size: 24px;
+        font-size: 22px;
     }
     
     .home-info-subtitle {
@@ -2370,7 +2446,7 @@ body::after {
     }
     
     .info-section h2 {
-        font-size: 18px;
+        font-size: 17px;
     }
     
     .info-section p {
@@ -2452,39 +2528,68 @@ body::after {
     }
 }
 
-@media (max-width: 480px) {
+/* Extra Small Devices */
+@media (max-width: 360px) {
     .hero-title {
-        font-size: 32px;
+        font-size: 24px;
     }
     
     .hero-subtitle {
-        font-size: 18px;
-    }
-    
-    .section-title {
-        font-size: 28px;
-    }
-    
-    .welcome-section h2 {
-        font-size: 24px;
-    }
-    
-    .sidebar-header .logo h1 {
-        font-size: 16px;
-    }
-    
-    .sidebar-header .logo-icon {
-        font-size: 24px;
-    }
-    
-    .nav-btn {
-        padding: 12px 15px;
         font-size: 14px;
     }
     
-    .btn-logout {
-        padding: 10px 15px;
+    .hero-description {
+        font-size: 12px;
+    }
+    
+    .btn-primary, .btn-secondary {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+    
+    .btn-large {
+        padding: 10px 20px;
         font-size: 13px;
+    }
+    
+    .section-title {
+        font-size: 20px;
+    }
+    
+    .welcome-section h2 {
+        font-size: 17px;
+    }
+    
+    .book-title {
+        font-size: 14px;
+    }
+    
+    .book-cover {
+        font-size: 45px;
+    }
+    
+    .chapter-content {
+        font-size: 13px;
+    }
+    
+    .chapter-content h2 {
+        font-size: 16px;
+    }
+    
+    .chapter-content h3 {
+        font-size: 15px;
+    }
+    
+    .chapter-content p {
+        font-size: 13px;
+    }
+    
+    .home-info-header h1 {
+        font-size: 20px;
+    }
+    
+    .info-section h2 {
+        font-size: 16px;
     }
 }
 
