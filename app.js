@@ -4,7 +4,6 @@ let currentBook = null;
 let currentChapter = 0;
 let bookmarkedBooks = JSON.parse(localStorage.getItem('bookmarkedBooks')) || [];
 let currentCategory = 'all';
-
 // ==================== STATE PERSISTENCE ====================
 const STATE_KEY = 'webLiterasi_state';
 
