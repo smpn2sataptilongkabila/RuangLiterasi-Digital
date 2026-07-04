@@ -23,11 +23,13 @@
             
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#" class="nav-link" onclick="showHomeScreen(); closeMobileMenu(); return false;">Beranda</a></li>
-                <li><a href="#" class="nav-link" onclick="showDashboard(); closeMobileMenu(); return false;">Perpustakaan</a></li>
+                <li><a href="#" id="navPerpustakaan" class="nav-link" onclick="openPerpustakaan(); closeMobileMenu(); return false;">Perpustakaan</a></li>
                 <li><a href="#" class="nav-link" onclick="showHomeInfo(); closeMobileMenu(); return false;">Tentang</a></li>
             </ul>
         </div>
     </nav>
+
+    <!-- Sidebar removed: navigation uses top navbar and mobile bottom nav -->
 
     <!-- Home Screen -->
     <div id="homeScreen" class="screen active">
@@ -38,10 +40,10 @@
                     </h1>
                     <p class="hero-subtitle">Perpustakaan Digital SMPN 2 Satap Tilongkabila </p>
                     <p class="hero-description">Temukan ilmu melalui buku-buku pilihan tentang korespondensi, kearsipan, untuk Meningkatkan Literas Anda</p>
-                    <button class="btn-primary btn-large" onclick="showDashboard()">
-                        🚀 Masuk ke Dashboard
-            
-                </div>
+                        <button class="btn-primary btn-large" onclick="enterDashboardHome()">
+                            🚀 Masuk ke Dashboard
+                        </button>
+                    </div>
                 <div class="hero-decoration">
                     <div class="floating-book book-1">📧</div>
                     <div class="floating-book book-2">📁</div>
@@ -195,51 +197,6 @@
     <!-- Dashboard -->
     <div id="dashboard" class="screen">
         <div class="dashboard-layout">
-            <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-            <aside class="dashboard-sidebar" id="sidebar">
-                <div class="sidebar-header">
-                    <div class="logo">
-                        <span class="logo-icon">📚</span>
-                        <h1>Web Literasi</h1>
-                    </div>
-                    <button class="hamburger-menu" id="hamburgerMenu" onclick="toggleSidebar()">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
-
-                <nav class="dashboard-nav">
-                    <button class="nav-btn active" data-category="home" onclick="navigateToCategory('home')">
-                        <span>🏠</span>
-                        <span>Home</span>
-                    </button>
-                    <button class="nav-btn" data-category="korespondensi" onclick="navigateToCategory('korespondensi')">
-                        <span>📧</span>
-                        <span>Korespondensi</span>
-                    </button>
-                    <button class="nav-btn" data-category="kearsipan" onclick="navigateToCategory('kearsipan')">
-                        <span>📁</span>
-                        <span>Kearsipan</span>
-                    </button>
-                    <button class="nav-btn" data-category="cerita" onclick="navigateToCategory('cerita')">
-                        <span>📖</span>
-                        <span>Cerita</span>
-                    </button>
-                    <button class="nav-btn" id="bookmarkedNavBtn" onclick="showBookmarkedBooks()">
-                        <span>❤️</span>
-                        <span>Buku Tersimpan</span>
-                    </button>
-                </nav>
-
-                <div class="sidebar-footer">
-                    <button class="btn-logout" onclick="logout()">
-                        <span>🚪</span>
-                        <span>Logout</span>
-                    </button>
-                </div>
-            </aside>
-
             <main class="dashboard-content">
                 <div class="container">
                     <div class="welcome-section">
@@ -298,8 +255,8 @@
                 <div class="reader-content" id="readerContent">
                     <div class="chapter-content" id="chapterContent"></div>
                     <div class="reader-navigation">
-                        <button class="nav-btn" id="prevChapter" onclick="previousChapter()">← Sebelumnya</button>
-                        <button class="nav-btn" id="nextChapter" onclick="nextChapter()">Selanjutnya →</button>
+                        <button class="reader-nav-btn" id="prevChapter" onclick="previousChapter()">← Sebelumnya</button>
+                        <button class="reader-nav-btn" id="nextChapter" onclick="nextChapter()">Selanjutnya →</button>
                     </div>
                 </div>
             </div>
