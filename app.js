@@ -2,7 +2,14 @@
 let currentScreen = 'homeScreen';
 let currentBook = null;
 let currentChapter = 0;
-let bookmarkedBooks = JSON.parse(localStorage.getItem('bookmarkedBooks')) || [];
+let bookmarkedBooks = [];
+try {
+    const raw = localStorage.getItem('bookmarkedBooks');
+    if (raw) bookmarkedBooks = JSON.parse(raw) || [];
+} catch (e) {
+    console.warn('Could not parse bookmarkedBooks from localStorage, resetting.', e);
+    bookmarkedBooks = [];
+}
 let currentCategory = 'all';
 // ==================== STATE PERSISTENCE ====================
 const STATE_KEY = 'webLiterasi_state';
@@ -13,10 +20,10 @@ function saveState() {
         currentCategory: currentCategory,
         currentBookId: currentBook ? currentBook.id : null,
         currentChapter: currentChapter,
-        sidebarOpen: false
     };
     localStorage.setItem(STATE_KEY, JSON.stringify(state));
 }
+
 
 function loadState() {
     const savedState = localStorage.getItem(STATE_KEY);
@@ -2180,28 +2187,59 @@ Best regards,
     }
 ];
 
+// ==================== MOBILE MENU ====================
+function toggleMobileMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+}
+
+function closeMobileMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('active');
+}
+
 // ==================== NAVIGATION ====================
 let booksVisible = false;
 
 function showDashboard() {
-    document.getElementById('homeScreen').classList.remove('active');
-    document.getElementById('dashboard').classList.add('active');
+    try { document.getElementById('homeScreen').classList.remove('active'); } catch (e) {}
+    try { document.getElementById('homeInfo').classList.remove('active'); } catch (e) {}
+    const dash = document.getElementById('dashboard');
+    if (dash) dash.classList.add('active');
     currentScreen = 'dashboard';
-    
-    // Automatically show home section content
+
+    // Show books grid
     const container = document.getElementById('booksGrid');
-    container.style.display = 'grid';
-    
-    // Show home info by default
-    renderHomeInfo();
-    
-    // Set home button as active
-    document.querySelectorAll('.nav-btn[data-category]').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    document.querySelector('.nav-btn[data-category="home"]').classList.add('active');
-    
+    if (container) container.style.display = 'grid';
+
+    // Render books (show full library by default)
+    if (currentCategory && currentCategory !== 'all') {
+        renderBooks(currentCategory);
+    } else {
+        renderBooks('all');
+    }
+
+    // Sidebar removed: no overlay/sidebar state to restore
+
+    // Ensure top nav links visible
+    try { updateTopNavVisibility('dashboard'); } catch (e) {}
+
+    // Set appropriate nav-btn active
+    document.querySelectorAll('.nav-btn[data-category]').forEach(btn => btn.classList.remove('active'));
+    const activeBtn = document.querySelector(`.nav-btn[data-category="${currentCategory === 'all' ? 'home' : currentCategory}"]`);
+    if (activeBtn) activeBtn.classList.add('active');
+
+    // close mobile top nav if open
+    try { closeMobileMenu(); } catch (e) {}
+
     // Save state
+    try { closeMobileMenu(); } catch (e) {}
     saveState();
 }
 
@@ -2218,13 +2256,44 @@ function showBookmarkedBooks() {
     renderBookmarkedBooks();
     
     // Set bookmarked button as active
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    document.getElementById('bookmarkedNavBtn').classList.add('active');
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+    const bmBtn = document.getElementById('bookmarkedNavBtn');
+    if (bmBtn) bmBtn.classList.add('active');
     
     // Save state
     saveState();
+}
+
+// Helper to open Perpustakaan and set URL state (opens dashboard view)
+function openPerpustakaan() {
+    try {
+        // Open dashboard and default to 'korespondensi' category
+        currentCategory = 'korespondensi';
+        showDashboard();
+        try { navigateToCategory('korespondensi'); } catch (e) { /* fallback handled by showDashboard/renderBooks */ }
+        // set URL hash so user can bookmark / share
+        if (window.history && window.history.pushState) {
+            window.history.pushState({ screen: 'dashboard' }, 'Perpustakaan', '#perpustakaan');
+        } else {
+            location.hash = 'perpustakaan';
+        }
+    } catch (e) {
+        console.error('Error opening Perpustakaan:', e);
+        showDashboard();
+    }
+    try { updateTopNavVisibility('dashboard'); } catch (e) {}
+}
+
+// Toggle Perpustakaan link visibility on the top navbar
+function updateTopNavVisibility(screen) {
+    const perp = document.getElementById('navPerpustakaan');
+    if (!perp) return;
+    // Show Perpustakaan on dashboard and on About (homeInfo); hide on initial home
+    if (screen === 'dashboard' || screen === 'homeInfo') {
+        perp.classList.remove('hidden');
+    } else {
+        perp.classList.add('hidden');
+    }
 }
 
 function toggleBooks() {
@@ -2235,7 +2304,7 @@ function toggleBooks() {
     if (booksVisible) {
         // Show books
         container.style.display = 'grid';
-        toggleBtn.innerHTML = '🙈 Sembunyikan Buku';
+        if (toggleBtn) toggleBtn.innerHTML = '🙈 Sembunyikan Buku';
         // Render books based on current category
         if (currentCategory === 'home') {
             renderHomeInfo();
@@ -2245,7 +2314,7 @@ function toggleBooks() {
     } else {
         // Hide books
         container.style.display = 'none';
-        toggleBtn.innerHTML = '📚 Tampilkan Buku';
+        if (toggleBtn) toggleBtn.innerHTML = '📚 Tampilkan Buku';
     }
 }
 
@@ -2255,6 +2324,9 @@ function showHomeInfo() {
     document.getElementById('homeInfo').classList.add('active');
     currentScreen = 'homeInfo';
     
+    // Update top nav visibility for about/home
+    try { updateTopNavVisibility('homeInfo'); } catch (e) {}
+
     // Save state
     saveState();
 }
@@ -2265,6 +2337,9 @@ function showHomeScreen() {
     document.getElementById('homeScreen').classList.add('active');
     currentScreen = 'homeScreen';
     
+    // Update top nav visibility for home
+    try { updateTopNavVisibility('homeScreen'); } catch (e) {}
+
     // Save state
     saveState();
 }
@@ -2280,82 +2355,7 @@ function logout() {
     }
 }
 
-function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebarOverlay');
-    sidebar.classList.toggle('active');
-    
-    // Toggle overlay
-    if (sidebar.classList.contains('active')) {
-        overlay.classList.add('active');
-    } else {
-        overlay.classList.remove('active');
-    }
-}
-
-// Close sidebar when clicking outside on mobile
-window.addEventListener('click', function(e) {
-    const sidebar = document.getElementById('sidebar');
-    const hamburgerMenu = document.getElementById('hamburgerMenu');
-    const overlay = document.getElementById('sidebarOverlay');
-    
-    if (window.innerWidth <= 768 && sidebar && hamburgerMenu && !sidebar.contains(e.target) && !hamburgerMenu.contains(e.target)) {
-        sidebar.classList.remove('active');
-        if (overlay) {
-            overlay.classList.remove('active');
-        }
-    }
-});
-
-// Add touch swipe support for sidebar
-let touchStartX = 0;
-let touchEndX = 0;
-
-document.addEventListener('touchstart', function(e) {
-    touchStartX = e.changedTouches[0].screenX;
-}, { passive: true });
-
-document.addEventListener('touchend', function(e) {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-}, { passive: true });
-
-function handleSwipe() {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebarOverlay');
-    const swipeThreshold = 50;
-    
-    // Only handle swipe on mobile/tablet
-    if (window.innerWidth > 768) return;
-    
-    const diff = touchStartX - touchEndX;
-    
-    // Swipe right to open sidebar (from left edge)
-    if (diff > swipeThreshold && touchStartX < 50 && !sidebar.classList.contains('active')) {
-        sidebar.classList.add('active');
-        if (overlay) {
-            overlay.classList.add('active');
-        }
-    }
-    // Swipe left to close sidebar
-    else if (diff < -swipeThreshold && sidebar.classList.contains('active')) {
-        sidebar.classList.remove('active');
-        if (overlay) {
-            overlay.classList.remove('active');
-        }
-    }
-}
-
-// Close sidebar when window is resized to desktop size
-window.addEventListener('resize', function() {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebarOverlay');
-    
-    if (window.innerWidth > 768 && sidebar && overlay) {
-        sidebar.classList.remove('active');
-        overlay.classList.remove('active');
-    }
-});
+// Sidebar removed: sidebar-specific UI handlers eliminated
 
 // Category navigation
 document.querySelectorAll('.nav-btn[data-category]').forEach(btn => {
@@ -2380,9 +2380,67 @@ document.querySelectorAll('.nav-btn[data-category]').forEach(btn => {
     });
 });
 
+// Ensure top navbar Perpustakaan link works from any screen (including About/homeInfo)
+try {
+    const perpLink = document.getElementById('navPerpustakaan');
+    if (perpLink) {
+        perpLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            try { openPerpustakaan(); } catch (err) { console.error(err); }
+            try { closeMobileMenu(); } catch (err) {}
+            return false;
+        });
+    }
+} catch (e) {
+    console.warn('Could not attach navPerpustakaan handler', e);
+}
+
+// Robust delegated handler: catches clicks even if link is recreated or overlapped
+document.addEventListener('click', function (e) {
+    const perpEl = e.target.closest && e.target.closest('#navPerpustakaan');
+    if (!perpEl) return;
+    e.preventDefault();
+    try { openPerpustakaan(); } catch (err) { console.error('openPerpustakaan error', err); }
+    try { closeMobileMenu(); } catch (err) {}
+}, { passive: false });
+
+// Compatibility helper for inline onclicks and mobile nav
+function navigateToCategory(category) {
+    if (!category) return;
+    currentCategory = category;
+
+    // Activate sidebar buttons if present
+    document.querySelectorAll('.nav-btn[data-category]').forEach(b => {
+        if (b.getAttribute('data-category') === category) b.classList.add('active');
+        else b.classList.remove('active');
+    });
+
+    // Update mobile bottom nav active state (checks inline onclick)
+    document.querySelectorAll('.mobile-nav-item').forEach(item => {
+        const onclick = item.getAttribute('onclick') || '';
+        if (onclick.indexOf(`'${category}'`) !== -1 || onclick.indexOf(`"${category}"`) !== -1) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+
+    // Show books grid
+    const container = document.getElementById('booksGrid');
+    if (container) container.style.display = 'grid';
+
+    if (category === 'home') renderHomeInfo();
+    else renderBooks(category === 'all' ? 'all' : category);
+
+    // close mobile top nav if open
+    try { closeMobileMenu(); } catch (e) {}
+    saveState();
+}
+
 // ==================== RENDER FUNCTIONS ====================
 function renderBooks(category) {
     const container = document.getElementById('booksGrid');
+    if (!container) return;
     let filteredBooks = booksData;
     
     if (category !== 'all') {
@@ -2395,126 +2453,45 @@ function renderBooks(category) {
 function renderHomeInfo() {
     const container = document.getElementById('booksGrid');
     const welcomeSection = document.querySelector('.welcome-section');
-    
+    if (!container || !welcomeSection) return;
+
     // Update welcome message
     welcomeSection.innerHTML = `
-        <h2>📖 Pentingnya Ilmu dalam Kehidupan</h2>
-        <p>Mengapa membaca dan belajar adalah kunci sukses?</p>
+        <h2>📖 Selamat Datang di Ruang Literasi</h2>
+        <p>Pilih kategori atau jelajahi koleksi rekomendasi kami.</p>
     `;
-    
-    // Render informational content
+
+    // Render informational content as tidy cards inside the existing grid
     container.innerHTML = `
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; animation: fadeInUp 0.8s ease-out;">
-            
-            <!-- Card 1: Pentingnya Ilmu -->
-            <div style="background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%); border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);">
-                <div style="font-size: 56px; margin-bottom: 20px; text-align: center;">🎓</div>
-                <h3 style="font-size: 22px; font-weight: 700; color: #1e3a8a; margin-bottom: 15px; text-align: center;">Mengapa Ilmu Penting?</h3>
-                <div style="color: #374151; line-height: 1.8; font-size: 14px;">
-                    <p style="margin-bottom: 12px;"><strong>📚 Ilmu adalah cahaya:</strong> Menghilangkan kegelapan ketidakpastian dan membuka pintu kesuksesan.</p>
-                    <p style="margin-bottom: 12px;"><strong>💡 Ilmu adalah kekuatan:</strong> Memberdayakan kita untuk membuat perubahan positif dalam hidup dan masyarakat.</p>
-                    <p style="margin-bottom: 12px;"><strong>🌟 Ilmu adalah investasi:</strong> Tidak ada yang bisa merampas pengetahuan yang telah kita peroleh.</p>
-                    <p><strong>🚀 Ilmu adalah kunci:</strong> Membuka peluang tak terbatas untuk masa depan yang lebih baik.</p>
-                </div>
-            </div>
-
-            <!-- Card 2: Manfaat Membaca -->
-            <div style="background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%); border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);">
-                <div style="font-size: 56px; margin-bottom: 20px; text-align: center;">📖</div>
-                <h3 style="font-size: 22px; font-weight: 700; color: #1e3a8a; margin-bottom: 15px; text-align: center;">Manfaat Membaca Buku</h3>
-                <div style="color: #374151; line-height: 1.8; font-size: 14px;">
-                    <p style="margin-bottom: 12px;"><strong>🧠 Meningkatkan kecerdasan:</strong> Melatih otak dan meningkatkan kemampuan berpikir kritis.</p>
-                    <p style="margin-bottom: 12px;"><strong>💪 Mengurangi stres:</strong> Membaca adalah cara efektif untuk relaksasi dan menenangkan pikiran.</p>
-                    <p style="margin-bottom: 12px;"><strong>🎯 Fokus dan konsentrasi:</strong> Melatih kemampuan berkonsentrasi dalam dunia yang penuh distraksi.</p>
-                    <p><strong>✍️ Meningkatkan bahasa:</strong> Memperkaya kosakata dan kemampuan komunikasi.</p>
-                </div>
-            </div>
-
-            <!-- Card 3: Tips Belajar Efektif -->
-            <div style="background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%); border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);">
-                <div style="font-size: 56px; margin-bottom: 20px; text-align: center;">💡</div>
-                <h3 style="font-size: 22px; font-weight: 700; color: #1e3a8a; margin-bottom: 15px; text-align: center;">Tips Belajar Efektif</h3>
-                <div style="color: #374151; line-height: 1.8; font-size: 14px;">
-                    <p style="margin-bottom: 12px;"><strong>📅 Buat jadwal:</strong> Tetapkan waktu khusus untuk belajar setiap hari secara konsisten.</p>
-                    <p style="margin-bottom: 12px;"><strong>📝 Catat penting:</strong> Buat ringkasan dan catatan dari yang Anda pelajari.</p>
-                    <p style="margin-bottom: 12px;"><strong>🔄 Review berkala:</strong> Ulangi materi yang sudah dipelajari untuk mengingatnya.</p>
-                    <p><strong>🎓 Praktik langsung:</strong> Terapkan ilmu yang dipelajari dalam kehidupan nyata.</p>
-                </div>
-            </div>
-
-            <!-- Card 4: Nilai-nilai Pendidikan -->
-            <div style="background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%); border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);">
-                <div style="font-size: 56px; margin-bottom: 20px; text-align: center;">⭐</div>
-                <h3 style="font-size: 22px; font-weight: 700; color: #1e3a8a; margin-bottom: 15px; text-align: center;">Nilai-nilai Pendidikan</h3>
-                <div style="color: #374151; line-height: 1.8; font-size: 14px;">
-                    <p style="margin-bottom: 12px;"><strong>🎯 Integritas:</strong> Belajar dengan jujur dan bertanggung jawab.</p>
-                    <p style="margin-bottom: 12px;"><strong>🤝 Kolaborasi:</strong> Belajar bersama dan membantu sesama.</p>
-                    <p style="margin-bottom: 12px;"><strong>💪 Ketekunan:</strong> Terus berusaha meskipun menghadapi tantangan.</p>
-                    <p><strong>🌟 Inovasi:</strong> Berani berpikir kreatif dan mencari solusi baru.</p>
-                </div>
-            </div>
-
-            <!-- Card 5: Literasi Digital -->
-            <div style="background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%); border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);">
-                <div style="font-size: 56px; margin-bottom: 20px; text-align: center;">💻</div>
-                <h3 style="font-size: 22px; font-weight: 700; color: #1e3a8a; margin-bottom: 15px; text-align: center;">Literasi Digital</h3>
-                <div style="color: #374151; line-height: 1.8; font-size: 14px;">
-                    <p style="margin-bottom: 12px;"><strong>🌐 Akses informasi:</strong> Dunia pengetahuan di ujung jari Anda.</p>
-                    <p style="margin-bottom: 12px;"><strong>🔍 Evaluasi sumber:</strong> Kemampuan membedakan informasi valid dan hoaks.</p>
-                    <p style="margin-bottom: 12px;"><strong>🛡️ Keamanan digital:</strong> Melindungi diri di dunia maya.</p>
-                    <p><strong>🤝 Etika digital:</strong> Berkomunikasi dengan sopan dan bertanggung jawab.</p>
-                </div>
-            </div>
-
-            <!-- Card 6: Membangun Karakter -->
-            <div style="background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%); border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);">
-                <div style="font-size: 56px; margin-bottom: 20px; text-align: center;">🌱</div>
-                <h3 style="font-size: 22px; font-weight: 700; color: #1e3a8a; margin-bottom: 15px; text-align: center;">Membangun Karakter</h3>
-                <div style="color: #374151; line-height: 1.8; font-size: 14px;">
-                    <p style="margin-bottom: 12px;"><strong>💭 Berpikir kritis:</strong> Menganalisis sebelum bertindak.</p>
-                    <p style="margin-bottom: 12px;"><strong>❤️ Empati:</strong> Memahami perasaan orang lain.</p>
-                    <p style="margin-bottom: 12px;"><strong>🎯 Tujuan hidup:</strong> Memiliki visi dan misi yang jelas.</p>
-                    <p><strong>🌈 Multitasking:</strong> Mampu menyeimbangkan berbagai aspek kehidupan.</p>
-                </div>
-            </div>
-
+        <div class="feature-card">
+            <div style="font-size:48px; text-align:center; margin-bottom:12px;">🎓</div>
+            <h3 style="font-size:18px; font-weight:700; color:var(--primary); text-align:center; margin-bottom:8px;">Mengapa Membaca?</h3>
+            <p style="color:var(--gray-700); font-size:14px; line-height:1.6;">Membaca membuka wawasan dan membantu membangun keterampilan kritis untuk masa depan.</p>
         </div>
-
-        <!-- Quote Section -->
-        <div style="margin-top: 40px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(245, 158, 11, 0.1) 100%); border-left: 5px solid #f59e0b; padding: 25px 30px; border-radius: 12px; backdrop-filter: blur(10px); box-shadow: 0 8px 20px rgba(0,0,0,0.15);">
-            <div style="font-size: 48px; margin-bottom: 15px; text-align: center;">💬</div>
-            <h3 style="font-size: 20px; font-weight: 700; color: #fbbf24; margin-bottom: 15px; text-align: center; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
-                "Ilmu adalah satu-satunya harta yang tidak akan pernah habis jika dibagikan"
-            </h3>
-            <p style="color: white; text-align: center; font-size: 15px; opacity: 0.95; font-style: italic; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">
-                - Marcus Tullius Cicero -
-            </p>
+        <div class="feature-card">
+            <div style="font-size:48px; text-align:center; margin-bottom:12px;">📂</div>
+            <h3 style="font-size:18px; font-weight:700; color:var(--primary); text-align:center; margin-bottom:8px;">Katalog Terorganisir</h3>
+            <p style="color:var(--gray-700); font-size:14px; line-height:1.6;">Koleksi dibagi per kategori agar Anda mudah menemukan buku sesuai minat.</p>
         </div>
-
-        <!-- Call to Action -->
-        <div style="margin-top: 30px; text-align: center; padding: 20px;">
-            <p style="color: white; font-size: 16px; margin-bottom: 20px; opacity: 0.95; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
-                🚀 Mulai perjalanan literasi Anda sekarang! Pilih kategori buku di menu samping dan eksplorasi koleksi kami.
-            </p>
-            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-                <div style="background: rgba(255,255,255,0.2); padding: 12px 20px; border-radius: 50px; font-size: 14px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3); color: white;">
-                    📧 Korespondensi
-                </div>
-                <div style="background: rgba(255,255,255,0.2); padding: 12px 20px; border-radius: 50px; font-size: 14px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3); color: white;">
-                    📁 Kearsipan
-                </div>
-                <div style="background: rgba(255,255,255,0.2); padding: 12px 20px; border-radius: 50px; font-size: 14px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3); color: white;">
-                    📖 Cerita
-                </div>
-            </div>
+        <div class="feature-card">
+            <div style="font-size:48px; text-align:center; margin-bottom:12px;">⭐</div>
+            <h3 style="font-size:18px; font-weight:700; color:var(--primary); text-align:center; margin-bottom:8px;">Rekomendasi Pilihan</h3>
+            <p style="color:var(--gray-700); font-size:14px; line-height:1.6;">Temukan buku populer dan editor's picks yang sesuai untuk pembelajaran dan hiburan.</p>
         </div>
     `;
+}
+
+// Open dashboard but show the Home/info cards inside the dashboard
+function enterDashboardHome() {
+    currentCategory = 'home';
+    try { showDashboard(); } catch (e) { console.error(e); }
+    try { navigateToCategory('home'); } catch (e) {}
 }
 
 function renderBookmarkedBooks() {
     const container = document.getElementById('booksGrid');
     const welcomeSection = document.querySelector('.welcome-section');
-    
+    if (!container || !welcomeSection) return;
     // Filter books that are bookmarked
     const bookmarked = booksData.filter(book => bookmarkedBooks.includes(book.id));
     
@@ -2621,10 +2598,12 @@ function showBookDetail(bookId) {
 
     currentBook = book;
     const isBookmarked = bookmarkedBooks.includes(book.id);
+    const titleEl = document.getElementById('bookDetailTitle');
+    const contentEl = document.getElementById('bookDetailContent');
+    if (titleEl) titleEl.textContent = book.title;
+    if (!contentEl) return;
 
-    document.getElementById('bookDetailTitle').textContent = book.title;
-    
-    document.getElementById('bookDetailContent').innerHTML = `
+    contentEl.innerHTML = `
         <div class="book-detail-header">
             <div class="book-detail-cover">${book.cover}</div>
             <div class="book-detail-info">
@@ -2686,7 +2665,8 @@ function showBookDetail(bookId) {
         </div>
     `;
 
-    document.getElementById('bookDetailModal').classList.add('active');
+    const modal = document.getElementById('bookDetailModal');
+    if (modal) modal.classList.add('active');
 }
 
 function closeBookDetail() {
@@ -2707,39 +2687,42 @@ function openBookReader(bookId, chapterIndex = 0) {
     document.getElementById('readerTitle').textContent = `📖 ${book.title}`;
     
     const chaptersList = document.getElementById('chaptersList');
+    if (!chaptersList) return;
     chaptersList.innerHTML = book.chapters.map((chapter, index) => `
         <li class="${index === chapterIndex ? 'active' : ''}" onclick="goToChapter(${index})">
             ${String(index + 1).padStart(2, '0')}. ${chapter.title}
         </li>
     `).join('');
-
     renderChapter(chapterIndex);
     updateNavigationButtons();
-    
+
     // Reset and start progress tracking
     updateReadingProgress();
-    
-    document.getElementById('bookReaderModal').classList.add('active');
+
+    const readerModal = document.getElementById('bookReaderModal');
+    if (readerModal) readerModal.classList.add('active');
     closeBookDetail();
-    
+
     // Add scroll listener for progress
     const readerContent = document.getElementById('readerContent');
-    readerContent.addEventListener('scroll', updateReadingProgress);
-    
+    if (readerContent) readerContent.addEventListener('scroll', updateReadingProgress);
+
     // Start reading time tracker
     startReadingTimer();
-    
+
     // Add keyboard navigation
     document.addEventListener('keydown', handleKeyboardNavigation);
-    
+
     // Add touch swipe support
     addSwipeSupport();
-    
+
     // Save state
     saveState();
 }
 
 function startReadingTimer() {
+    // clear any existing interval to avoid duplicates
+    if (readingInterval) clearInterval(readingInterval);
     readingTime = 0;
     readingInterval = setInterval(() => {
         readingTime++;
@@ -2930,9 +2913,20 @@ function toggleBookmark(bookId) {
     
     // Refresh the bookmarked books display if we're on dashboard home
     if (currentScreen === 'dashboard') {
-        const activeBtn = document.querySelector('.nav-btn.active');
-        if (activeBtn && activeBtn.getAttribute('data-category') === 'home') {
+        // If the bookmarked panel is active, re-render it; otherwise refresh current category
+        const bookmarkedBtn = document.getElementById('bookmarkedNavBtn');
+        if (bookmarkedBtn && bookmarkedBtn.classList.contains('active')) {
             renderBookmarkedBooks();
+        } else {
+            // re-render current view: either home info or current category
+            const activeBtn = document.querySelector('.nav-btn.active');
+            if (activeBtn) {
+                const cat = activeBtn.getAttribute('data-category');
+                if (cat === 'home') renderHomeInfo();
+                else if (cat) renderBooks(cat);
+            } else {
+                renderBooks(currentCategory === 'all' ? 'all' : currentCategory);
+            }
         }
     }
     
@@ -2995,6 +2989,7 @@ window.addEventListener('load', function() {
                 const categoryBtn = document.querySelector(`.nav-btn[data-category="${savedState.currentCategory}"]`);
                 if (categoryBtn) categoryBtn.classList.add('active');
             }
+            // Sidebar removed: no sidebar/overlay state to restore
             
             // Restore book reader if there was an open book
             if (savedState.currentBookId && savedState.currentBookId !== null) {
@@ -3012,6 +3007,12 @@ window.addEventListener('load', function() {
             // Default to home screen
             document.getElementById('homeScreen').classList.add('active');
         }
+        // Update top nav visibility based on restored screen
+        try { updateTopNavVisibility(savedState.currentScreen || 'homeScreen'); } catch (e) {}
+    }
+    else {
+        // No saved state — default to hiding Perpustakaan on initial home
+        try { updateTopNavVisibility('homeScreen'); } catch (e) {}
     }
 });
 
