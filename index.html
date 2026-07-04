@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">Ruang Literasi</span>
+            </div>
+            
+            <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#" class="nav-link" onclick="showHomeScreen(); closeMobileMenu(); return false;">Beranda</a></li>
+                <li><a href="#" class="nav-link" onclick="showDashboard(); closeMobileMenu(); return false;">Perpustakaan</a></li>
+                <li><a href="#" class="nav-link" onclick="showHomeInfo(); closeMobileMenu(); return false;">Tentang</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- Home Screen -->
     <div id="homeScreen" class="screen active">
         <div class="home-container">
@@ -14,14 +36,11 @@
                 <div class="hero-content">
                     <h1 class="hero-title">📚 Ruang Literasi
                     </h1>
-                    <p class="hero-subtitle">Perpustakaan Digital untuk Meningkatkan Literasi Anda</p>
-                    <p class="hero-description">Temukan ilmu melalui buku-buku pilihan tentang korespondensi, kearsipan, dan banyak lagi</p>
+                    <p class="hero-subtitle">Perpustakaan Digital SMPN 2 Satap Tilongkabila </p>
+                    <p class="hero-description">Temukan ilmu melalui buku-buku pilihan tentang korespondensi, kearsipan, untuk Meningkatkan Literas Anda</p>
                     <button class="btn-primary btn-large" onclick="showDashboard()">
                         🚀 Masuk ke Dashboard
-                    </button>
-                    <button class="btn-secondary btn-large" onclick="showHomeInfo()" style="margin-left: 10px;">
-                        ℹ️ Tentang Website
-                    </button>
+            
                 </div>
                 <div class="hero-decoration">
                     <div class="floating-book book-1">📧</div>
@@ -38,7 +57,7 @@
         <div class="home-info-container">
             <div class="home-info-header">
                 <h1>📚 Tentang Ruang Literasi</h1>
-                <p class="home-info-subtitle">Website Perpustakaan Digital SMPN 2 Satap Tkbl</p>
+                <p class="home-info-subtitle">Perpustakaan Digital SMPN 2 Satap Tilongkabila</p>
             </div>
 
             <div class="home-info-content">
@@ -141,22 +160,24 @@
                         <div class="contact-item">
                             <span class="contact-icon">🏫</span>
                             <div>
-                                <strong>SMP Negeri 2 Satap Tkbl</strong>
-                                <p>Jl. Pendidikan No. 123, Tkbl</p>
+                                <strong>SMPN 2 Satap Tilongkabila</strong>
+                                <p>Desa Lonuo, Kec. Tilongkabila, Kab. Bone Bolango, Prov. Gorontalo.
+</p>
                             </div>
                         </div>
                         <div class="contact-item">
                             <span class="contact-icon">📧</span>
                             <div>
                                 <strong>Email</strong>
-                                <p>info@smpn2satap-tkbl.sch.id</p>
+                                <p>smpn2sataptilongkabila2026@gmail.com
+                                </p>
                             </div>
                         </div>
                         <div class="contact-item">
                             <span class="contact-icon">🌐</span>
                             <div>
                                 <strong>Website</strong>
-                                <p>www.smpn2satap-tkbl.sch.id</p>
+                                <p>https://smpn2sataptilongkabila.github.io/RuangLiterasi-Digital/</p>
                             </div>
                         </div>
                     </div>
@@ -164,9 +185,6 @@
             </div>
 
             <div class="home-info-footer">
-                <button class="btn-primary btn-large" onclick="showDashboard()">
-                    🚀 Masuk ke Perpustakaan
-                </button>
                 <button class="btn-secondary btn-large" onclick="showHomeScreen()">
                     🏠 Kembali ke Beranda
                 </button>
@@ -192,11 +210,26 @@
                 </div>
 
                 <nav class="dashboard-nav">
-                    <button class="nav-btn active" data-category="home">🏠 Home</button>
-                    <button class="nav-btn" data-category="korespondensi">📧 Korespondensi</button>
-                    <button class="nav-btn" data-category="kearsipan">📁 Kearsipan</button>
-                    <button class="nav-btn" data-category="cerita">📖 Cerita</button>
-                    <button class="nav-btn" id="bookmarkedNavBtn" onclick="showBookmarkedBooks()">❤️ Buku Tersimpan</button>
+                    <button class="nav-btn active" data-category="home" onclick="navigateToCategory('home')">
+                        <span>🏠</span>
+                        <span>Home</span>
+                    </button>
+                    <button class="nav-btn" data-category="korespondensi" onclick="navigateToCategory('korespondensi')">
+                        <span>📧</span>
+                        <span>Korespondensi</span>
+                    </button>
+                    <button class="nav-btn" data-category="kearsipan" onclick="navigateToCategory('kearsipan')">
+                        <span>📁</span>
+                        <span>Kearsipan</span>
+                    </button>
+                    <button class="nav-btn" data-category="cerita" onclick="navigateToCategory('cerita')">
+                        <span>📖</span>
+                        <span>Cerita</span>
+                    </button>
+                    <button class="nav-btn" id="bookmarkedNavBtn" onclick="showBookmarkedBooks()">
+                        <span>❤️</span>
+                        <span>Buku Tersimpan</span>
+                    </button>
                 </nav>
 
                 <div class="sidebar-footer">
@@ -217,6 +250,30 @@
                     <div class="books-grid" id="booksGrid" style="display: none;"></div>
                 </div>
             </main>
+
+            <!-- Mobile Bottom Navigation -->
+            <nav class="mobile-bottom-nav" id="mobileBottomNav">
+                <button class="mobile-nav-item active" onclick="navigateToCategory('home')">
+                    <span class="mobile-nav-icon">🏠</span>
+                    <span class="mobile-nav-label">Home</span>
+                </button>
+                <button class="mobile-nav-item" onclick="navigateToCategory('korespondensi')">
+                    <span class="mobile-nav-icon">📧</span>
+                    <span class="mobile-nav-label">Korespondensi</span>
+                </button>
+                <button class="mobile-nav-item" onclick="navigateToCategory('kearsipan')">
+                    <span class="mobile-nav-icon">📁</span>
+                    <span class="mobile-nav-label">Kearsipan</span>
+                </button>
+                <button class="mobile-nav-item" onclick="navigateToCategory('cerita')">
+                    <span class="mobile-nav-icon">📖</span>
+                    <span class="mobile-nav-label">Cerita</span>
+                </button>
+                <button class="mobile-nav-item" onclick="showBookmarkedBooks()">
+                    <span class="mobile-nav-icon">❤️</span>
+                    <span class="mobile-nav-label">Tersimpan</span>
+                </button>
+            </nav>
         </div>
     </div>
 
