@@ -11,7 +11,7 @@
 .nav-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -240,10 +240,10 @@ body::after {
 .hero-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: 48px;
     align-items: center;
     min-height: calc(100vh - 200px);
-    padding: 40px 0;
+    padding: 48px 0;
 }
 
 .hero-content {
@@ -451,162 +451,23 @@ body::after {
     min-height: 100vh;
 }
 
-/* ==================== SIDEBAR ==================== */
-.dashboard-sidebar {
-    width: 280px;
-    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
-    color: var(--white);
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    z-index: 1000;
-    transition: transform 0.3s;
-    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar-header {
-    padding: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.logo-icon {
-    font-size: 32px;
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.logo h1 {
-    font-size: 20px;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.hamburger-menu {
-    display: none;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 25px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 1001;
-}
-
-.hamburger-menu span {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background: var(--white);
-    border-radius: 3px;
-    transition: all 0.3s;
-}
-
-.hamburger-menu:hover span {
-    background: var(--accent);
-}
-
-/* ==================== DASHBOARD NAVIGATION ==================== */
-.dashboard-nav {
-    flex: 1;
-    padding: 20px 0;
-    overflow-y: auto;
-}
-
-.nav-btn {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    padding: 15px 20px;
-    background: transparent;
-    color: var(--white);
-    border: none;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    text-align: left;
-}
-
-.nav-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateX(5px);
-}
-
-.nav-btn.active {
-    background: rgba(255, 255, 255, 0.2);
-    color: var(--white);
-    border-left: 4px solid var(--accent);
-}
-
-/* ==================== SIDEBAR FOOTER ==================== */
-.sidebar-footer {
-    padding: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.btn-logout {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    padding: 12px 20px;
-    background: rgba(255, 255, 255, 0.2);
-    color: var(--white);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: var(--radius);
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-logout:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-}
+/* Sidebar styles removed (sidebar deleted from markup). */
 
 /* ==================== DASHBOARD CONTENT ==================== */
 .dashboard-content {
     flex: 1;
-    padding: 40px;
-    margin-left: 280px;
+    padding: 32px 18px;
+    margin-left: 0; /* sidebar removed */
     min-height: 100vh;
+    padding-bottom: 100px !important; /* ensure content not hidden behind bottom nav */
 }
 
-/* Hide sidebar on desktop - show only on mobile */
-@media (min-width: 769px) {
-    .dashboard-sidebar {
-        display: none;
-    }
-    
-    .dashboard-content {
-        margin-left: 0 !important;
-    }
-}
+/* Sidebar visibility is handled by specific mobile/desktop media queries below. */
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0;
+    padding: 0 18px;
 }
 
 .welcome-section {
@@ -824,7 +685,7 @@ body::after {
 .books-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
+    gap: 20px;
 }
 
 .book-card {
@@ -1295,7 +1156,7 @@ body::after {
 
 .reader-sidebar {
     background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
-    padding: 25px;
+    padding: 16px;
     border-right: 4px solid #1e3a8a;
     max-height: 70vh;
     overflow-y: auto;
@@ -1485,7 +1346,7 @@ body::after {
     z-index: 2;
 }
 
-.nav-btn {
+.reader-nav-btn {
     padding: 16px 32px;
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
     color: var(--white);
@@ -1503,7 +1364,7 @@ body::after {
     overflow: hidden;
 }
 
-.nav-btn::before {
+.reader-nav-btn::before {
     content: '';
     position: absolute;
     top: 0;
@@ -1514,17 +1375,17 @@ body::after {
     transition: left 0.5s;
 }
 
-.nav-btn:hover::before {
+.reader-nav-btn:hover::before {
     left: 100%;
 }
 
-.nav-btn:hover:not(:disabled) {
+.reader-nav-btn:hover:not(:disabled) {
     transform: translateY(-3px);
     box-shadow: var(--shadow-xl);
     background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary) 100%);
 }
 
-.nav-btn:disabled {
+.reader-nav-btn:disabled {
     opacity: 0.4;
     cursor: not-allowed;
     transform: none;
@@ -2094,22 +1955,7 @@ body::after {
 
 /* ==================== RESPONSIVE DESIGN ==================== */
 
-/* Mobile Overlay for Sidebar */
-.sidebar-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    backdrop-filter: blur(4px);
-}
-
-.sidebar-overlay.active {
-    display: block;
-}
+/* Sidebar overlay removed */
 
 /* Large Tablets and Small Desktops */
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -2140,12 +1986,8 @@ body::after {
         font-size: 90px;
     }
     
-    .dashboard-sidebar {
-        width: 250px;
-    }
-    
+    /* Sidebar removed: adjust dashboard content spacing for tablet */
     .dashboard-content {
-        margin-left: 250px;
         padding: 30px 25px;
     }
     
@@ -2260,21 +2102,8 @@ body::after {
     }
     
     /* Dashboard Layout */
-    .dashboard-sidebar {
-        transform: translateX(-100%);
-        width: 280px;
-    }
-    
-    .dashboard-sidebar.active {
-        transform: translateX(0);
-    }
-    
-    .hamburger-menu {
-        display: flex;
-    }
-    
+    /* Sidebar removed for mobile: no transforms required */
     .dashboard-content {
-        margin-left: 0;
         padding: 20px 15px;
         min-height: 100vh;
     }
@@ -2946,6 +2775,7 @@ body::after {
 
 /* ==================== BOTTOM NAVIGATION (ALL DEVICES) ==================== */
 .mobile-bottom-nav {
+    display: flex; /* always visible on all devices */
     position: fixed;
     bottom: 0;
     left: 0;
@@ -3007,13 +2837,6 @@ body::after {
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
-.mobile-nav-label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
 /* Desktop Bottom Navigation */
 @media (min-width: 769px) {
     .mobile-bottom-nav {
@@ -3033,7 +2856,7 @@ body::after {
     }
     
     .mobile-nav-label {
-        font-size: 11px;
+        font-size: 12px;
     }
     
     .mobile-nav-item:hover {
@@ -3051,19 +2874,8 @@ body::after {
         height: 4px;
     }
     
-    /* Add padding to bottom of content to account for fixed bottom nav */
-    .dashboard-content {
-        padding-bottom: 100px !important;
-    }
-    
-    /* Hide sidebar on desktop */
-    .dashboard-sidebar {
-        display: none;
-    }
-    
-    .dashboard-content {
-        margin-left: 0 !important;
-    }
+    /* desktop: no fixed bottom nav, no extra bottom padding needed */
+
 }
 
 /* Mobile Bottom Navigation */
@@ -3074,15 +2886,30 @@ body::after {
     }
     
     .mobile-nav-item {
-        padding: 8px 4px;
+        padding: 10px 4px;
     }
     
     .mobile-nav-icon {
-        font-size: 22px;
+        font-size: 20px;
+    }
+
+    /* Make home screen content display as a neat responsive grid */
+    #homeScreen .home-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        align-items: start;
+        padding-top: 20px;
+    }
+
+    /* Tweak books grid to be more responsive across devices */
+    .books-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 18px;
     }
     
     .mobile-nav-label {
-        font-size: 10px;
+        font-size: 13px;
     }
     
     /* Add padding to bottom of content to account for fixed bottom nav */
