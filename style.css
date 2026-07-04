@@ -1,3 +1,130 @@
+/* ==================== NAVBAR ==================== */
+.navbar {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    backdrop-filter: blur(10px);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.logo-icon {
+    font-size: 32px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.logo-text {
+    background: linear-gradient(135deg, #ffffff 0%, #fbbf24 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 8px;
+    align-items: center;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Hide certain nav links on home screen */
+.nav-link.hidden {
+    display: none;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: #fbbf24;
+    transition: width 0.3s;
+}
+
+.nav-link:hover::before {
+    width: 80%;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10000;
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: white;
+    border-radius: 3px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
 /* ==================== CSS RESET & VARIABLES ==================== */
 * {
     margin: 0;
@@ -465,6 +592,17 @@ body::after {
     min-height: 100vh;
 }
 
+/* Hide sidebar on desktop - show only on mobile */
+@media (min-width: 769px) {
+    .dashboard-sidebar {
+        display: none;
+    }
+    
+    .dashboard-content {
+        margin-left: 0 !important;
+    }
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -519,6 +657,167 @@ body::after {
 
 .btn-toggle-books:active {
     transform: translateY(-1px);
+}
+
+/* ==================== INFO CARDS GRID ==================== */
+.info-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.info-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s;
+    border-top: 5px solid var(--primary);
+    display: flex;
+    flex-direction: column;
+}
+
+.info-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+    border-top-color: var(--primary-light);
+}
+
+.info-card-header {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #ffffff 100%);
+    padding: 25px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--gray-200);
+    position: relative;
+}
+
+.info-card-icon {
+    font-size: 60px;
+    display: block;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.info-card-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--primary);
+    color: var(--white);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-card-body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 12px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.info-card-content {
+    color: var(--gray-600);
+    line-height: 1.6;
+    flex: 1;
+}
+
+.info-card-content p {
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.info-card-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Quote Section */
+.info-quote {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(245, 158, 11, 0.1) 100%);
+    border-left: 4px solid #f59e0b;
+    padding: 25px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.quote-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.quote-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fbbf24;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.quote-author {
+    color: white;
+    font-size: 14px;
+    opacity: 0.95;
+    font-style: italic;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Call to Action */
+.info-cta {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-radius: 24px;
+    padding: 25px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.info-cta p {
+    color: white;
+    font-size: 15px;
+    margin-bottom: 15px;
+    opacity: 0.95;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.category-chips {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.chip {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-size: 13px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.chip:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
 }
 
 /* ==================== BOOKS GRID ==================== */
@@ -2143,7 +2442,7 @@ body::after {
         font-size: 14px;
     }
     
-    /* Home Info Section */
+/* Home Info Section */
     .home-info-header h1 {
         font-size: 26px;
     }
@@ -2228,6 +2527,33 @@ body::after {
     .home-info-footer .btn-primary,
     .home-info-footer .btn-secondary {
         width: 100%;
+    }
+    
+/* Dashboard Home Cards - Mobile Responsive */
+    .welcome-section h2 {
+        font-size: 20px;
+    }
+    
+    .welcome-section p {
+        font-size: 13px;
+    }
+    
+    /* Ensure cards display horizontally */
+    #booksGrid > div {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 15px !important;
+        justify-content: center !important;
+    }
+    
+    #booksGrid > div > div {
+        flex: 1 1 200px !important;
+        max-width: 250px !important;
+        min-width: 180px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
     }
     
     /* Sidebar Header */
@@ -2537,6 +2863,231 @@ body::after {
     .chapters-list li {
         padding: 10px 12px;
         font-size: 13px;
+    }
+}
+
+/* ==================== MOBILE NAVBAR ==================== */
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 0 15px;
+        height: 60px;
+    }
+    
+    .nav-logo {
+        font-size: 16px;
+        gap: 8px;
+    }
+    
+    .logo-icon {
+        font-size: 24px;
+    }
+    
+    .logo-text {
+        font-size: 16px;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        flex-direction: column;
+        padding: 20px;
+        gap: 10px;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        z-index: 9998;
+    }
+    
+    .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .nav-link {
+        width: 100%;
+        padding: 15px 20px;
+        font-size: 16px;
+        justify-content: flex-start;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .nav-link:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateX(5px);
+    }
+    
+    /* Make hamburger menu more visible */
+    .hamburger-menu {
+        display: flex;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 6px;
+        padding: 8px;
+    }
+    
+    .hamburger-menu:hover {
+        background: rgba(255, 255, 255, 0.25);
+    }
+    
+    .hamburger-menu span {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* ==================== BOTTOM NAVIGATION (ALL DEVICES) ==================== */
+.mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    padding: 10px 0;
+    border-top: 3px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.mobile-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 4px;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    gap: 5px;
+    text-decoration: none;
+    position: relative;
+}
+
+.mobile-nav-item:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-3px);
+}
+
+.mobile-nav-item.active {
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 -4px 15px rgba(245, 158, 11, 0.4);
+}
+
+.mobile-nav-item.active::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 0 0 3px 3px;
+}
+
+.mobile-nav-icon {
+    font-size: 24px;
+    display: block;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.mobile-nav-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Desktop Bottom Navigation */
+@media (min-width: 769px) {
+    .mobile-bottom-nav {
+        display: flex !important;
+        padding: 12px 0;
+        border-top: 3px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 -6px 30px rgba(0, 0, 0, 0.4);
+    }
+    
+    .mobile-nav-item {
+        padding: 12px 8px;
+        font-size: 12px;
+    }
+    
+    .mobile-nav-icon {
+        font-size: 28px;
+    }
+    
+    .mobile-nav-label {
+        font-size: 11px;
+    }
+    
+    .mobile-nav-item:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-5px);
+    }
+    
+    .mobile-nav-item.active {
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 -6px 20px rgba(245, 158, 11, 0.5);
+    }
+    
+    .mobile-nav-item.active::before {
+        width: 50px;
+        height: 4px;
+    }
+    
+    /* Add padding to bottom of content to account for fixed bottom nav */
+    .dashboard-content {
+        padding-bottom: 100px !important;
+    }
+    
+    /* Hide sidebar on desktop */
+    .dashboard-sidebar {
+        display: none;
+    }
+    
+    .dashboard-content {
+        margin-left: 0 !important;
+    }
+}
+
+/* Mobile Bottom Navigation */
+@media (max-width: 768px) {
+    .mobile-bottom-nav {
+        display: flex !important;
+        padding: 8px 0;
+    }
+    
+    .mobile-nav-item {
+        padding: 8px 4px;
+    }
+    
+    .mobile-nav-icon {
+        font-size: 22px;
+    }
+    
+    .mobile-nav-label {
+        font-size: 10px;
+    }
+    
+    /* Add padding to bottom of content to account for fixed bottom nav */
+    .dashboard-content {
+        padding-bottom: 80px !important;
     }
 }
 
